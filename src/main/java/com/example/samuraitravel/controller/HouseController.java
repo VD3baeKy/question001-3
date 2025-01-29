@@ -222,16 +222,21 @@ public class HouseController {
          return "houses/show";
      }
      
-     @GetMapping("/houses/{houseId}/review/{reviewId}/delete")
+     //@GetMapping("/houses/{houseId}/review/{reviewId}/delete")
+     //@GetMapping("/{houseId}/review/{reviewId}/delete")
+     @GetMapping("/{houseId}/review/delete")
      public String delete(
     		 @PathVariable(name = "houseId") Integer houseId,
-    		 @PathVariable(name = "reviewId") Integer reviewId,
+    		 //@PathVariable(name = "reviewId") Integer reviewId,
+    		 @RequestParam("reviewIdData") Integer reviewId,
     		 @RequestParam("value") String valueDelete,
     		 Model model,
     		 @AuthenticationPrincipal UserDetailsImpl userDetails,
     		 RedirectAttributes redirectAttributes){
     	 
-    	 System.out.println("/houses/"+houseId+"/review/"+reviewId+"/edit");
+    	 System.out.println("houseId= " + houseId);
+    	 System.out.println("reviewId= " + reviewId);    	 
+    	 System.out.println(houseId+"/review/"+reviewId+"/delete");
     	 
     	 List <Review> reviews = reviewsRepository.findByHouseIdOrderByCreatedAtDesc(houseId);
     	 
@@ -253,21 +258,31 @@ public class HouseController {
  	     }
     	 
     	 //return "houses/show";
-    	 return "redirect:/houses/{houseId}";
+    	 //return "redirect:/houses/{houseId}";
+ 	     //return "houses/{houseId}";
+ 	     String retStr = "redirect:/houses/" + houseId;
+	     return retStr;
      }
          
      //@RequestMapping("/houses/{houseId}/review/{reviewId}/edit")
-     @PostMapping("/houses/{houseId}/review/{reviewId}/edit")
+     //@PostMapping("/houses/{houseId}/review/{reviewId}/edit")
+     //@PostMapping("/{houseId}/review/{reviewId}/edit")
+     @PostMapping("/{houseId}/review/edit")
      public String edit (
     		 @PathVariable(name = "houseId") Integer houseId,
-    		 @PathVariable(name = "reviewId") Integer reviewId,
+    		 //@PathVariable(name = "reviewId") Integer reviewId,
+    		 @RequestParam("reviewIdData") Integer reviewId,
     		 @RequestParam("contentChange") String fixContent,
     		 @RequestParam("ratingChange") Integer fixRating,
     		 @AuthenticationPrincipal UserDetailsImpl userDetails,
     		 Model model,
     		 RedirectAttributes redirectAttributes) {
     	 
-    	 System.out.println("/houses/"+houseId+"/review/"+reviewId+"/edit");
+    	 System.out.println("houseId= " + houseId);
+    	 System.out.println("reviewId= " + reviewId);
+    	 System.out.println("fixContent= " + fixContent);
+    	 System.out.println("fixRating= " + fixRating);
+    	 System.out.println(houseId+"/review/"+reviewId+"/edit");
     	 
     	 List <Review> reviews = reviewsRepository.findByHouseIdOrderByCreatedAtDesc(houseId);
     	 
@@ -294,7 +309,10 @@ public class HouseController {
  	     redirectAttributes.addFlashAttribute("successMessage", "レビューを修正しました。");
     	 
  	     //return "houses/show";
- 	     return "redirect:/houses/{houseId}";
+ 	     //return "redirect:/houses/{houseId}"; 	     
+ 	     //return "houses/{houseId}";
+ 	     String retStr = "redirect:/houses/" + houseId;
+ 	     return retStr;
      }
      
      /*

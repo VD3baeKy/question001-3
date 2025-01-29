@@ -383,14 +383,26 @@
 										const houseIdData = this.getAttribute('data-house-id');
 										const houseNameData = this.getAttribute('data-house-name');
 										const ratingData = this.getAttribute('data-rating');
+										//const actionkamen = "/houses/" + houseIdData + "/review/" + reviewIdData + "/delete";
+										const actionkamen1 = "/houses/" + houseIdData + "/review/" + "delete";
+										const actionkamen2 = "/houses/" + houseIdData + "/review/" + "edit";
+										
 										if(debugging==true){
 											console.log("editContent= "+contentData);
 											console.log("editRatingNumber= "+ratingData);
+											console.log("actionkamen1= "+actionkamen1);
+											console.log("actionkamen2= "+actionkamen2);;
 										}
 										document.getElementById('editContent').value = contentData;
 										document.getElementById('editRatingNumber').value = ratingData;
+										//document.getElementById('actioncamen').action = actionkamen;
+										
 										// モーダルを表示
 										$('#editModal').modal('show'); // jQueryを使用してモーダルを表示
+										document.getElementById('actioncamen1').action = actionkamen1;
+										document.getElementById('actioncamen2').action = actionkamen2;
+										document.getElementById('mendoina1').value = reviewIdData;
+										document.getElementById('mendoina2').value = reviewIdData;
 									});
 								});
 							};							
@@ -414,8 +426,10 @@
 										本当にこのレビューを削除しますか？
 									</div>
 									<div class="modal-footer">
-										<form method="post" th:action="@{/houses/__${house.getId()}__/review/__${currentUserId}__/delete}">
+										<!-- <form method="post" id="actioncamen" th:action="@{/houses/__${house.getId()}__/review/__${currentUserId}__/delete}"> -->
+											<form method="post" id="actioncamen1" action="#">
 											<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+											<input type="hidden" id="mendoina1" name="reviewIdData" value="0">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">
 												キャンセル
 											</button>
@@ -442,8 +456,10 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<form method="post" action="#" th:action="@{/houses/__${house.getId()}__/review/__${currentUserId}__/edit}">
+										<!-- <form method="post" id="actioncamen" th:action="@{/houses/__${house.getId()}__/review/__${currentUserId}__/edit}"> -->
+										<form method="post" id="actioncamen2" action="#">											
 											<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+											<input type="hidden" id="mendoina2" name="reviewIdData" value="0">
 											<div>
 												<!-- <label for="contentChange"> -->
 												<label>
