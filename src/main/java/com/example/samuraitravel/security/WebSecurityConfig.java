@@ -39,7 +39,7 @@ public class WebSecurityConfig {
                  .permitAll()
              //);
             )
-             .csrf().ignoringRequestMatchers("/stripe/webhook","/houses/{houseId}/review/{reviewId}/edit");
+             .csrf().ignoringRequestMatchers("/stripe/webhook");
             
          return http.build();
      }
