@@ -226,40 +226,36 @@ public class HouseController {
      public String delete(
     		 @PathVariable(name = "houseId") Integer houseId,
     		 @PathVariable(name = "reviewId") Integer reviewId,
+    		 @RequestParam("value") String valueDelete,
     		 Model model,
-    		 @AuthenticationPrincipal UserDetailsImpl userDetails){
+    		 @AuthenticationPrincipal UserDetailsImpl userDetails,
+    		 RedirectAttributes redirectAttributes){
     	 
-    	 reviewsRepository.deleteById(reviewId);
+    	 System.out.println("/houses/"+houseId+"/review/"+reviewId+"/edit");
     	 
-    	 
-    	 return "houses/show";
-     }
-     
-     /*
-     @PostMapping("/houses/{houseId}/review/{reviewId}/get")
-     public String get(
-    		 @PathVariable(name = "houseId") Integer houseId,
-    		 @PathVariable(name = "reviewId") Integer reviewId,
-    		 @RequestBody ReviewDto reviewDto, // ReviewDtoは内容と評価を持つクラス
-    		 Model model,
-    		 @AuthenticationPrincipal UserDetailsImpl userDetails){
+    	 List <Review> reviews = reviewsRepository.findByHouseIdOrderByCreatedAtDesc(houseId);
     	 
     	 // レビューをデータベースから取得
     	 Review existingReview = reviewsRepository.findById(reviewId).orElseThrow(() -> new NoSuchElementException("Review not found with id " + reviewId));
-
- 	     // ユーザーがレビューの所有者であることを確認
+    	 // ユーザーがレビューの所有者であることを確認
  	     if (!existingReview.getUserid().equals(userDetails.getUserId())) {
+ 	    	System.out.println("ユーザーがレビューの所有者であることを確認= NG");
  	         throw new AccessDeniedException("You do not have permission to edit this review.");
  	     }
+ 	     System.out.println("ユーザーがレビューの所有者であることを確認= OK");
  	     
- 	    // モデルに必要なデータを追加
- 	    model.addAttribute("review", existingReview);
- 	    model.addAttribute("houseId", houseId);
- 	    
-    	 return "houses/show";
+ 	     if(valueDelete.contains("delete") && valueDelete.length()==6) {
+	 	     //レビュー削除実行
+	    	 reviewsRepository.deleteById(reviewId);	    	 
+	    	 redirectAttributes.addFlashAttribute("successMessage", "レビューを削除しました。");
+ 	     }else {
+ 	    	redirectAttributes.addFlashAttribute("successMessage", "レビュー削除エラー");
+ 	     }
+    	 
+    	 //return "houses/show";
+    	 return "redirect:/houses/{houseId}";
      }
-     */
-     
+         
      //@RequestMapping("/houses/{houseId}/review/{reviewId}/edit")
      @PostMapping("/houses/{houseId}/review/{reviewId}/edit")
      public String edit (
@@ -295,7 +291,7 @@ public class HouseController {
  	     // モデルに必要なデータを追加（例: 更新後のレビューを表示するため）
  	     //model.addAttribute("review", fixContent);
  	     //model.addAttribute("houseId", houseId);
- 	     redirectAttributes.addFlashAttribute("successMessage", "会員情報を編集しました。");
+ 	     redirectAttributes.addFlashAttribute("successMessage", "レビューを修正しました。");
     	 
  	     //return "houses/show";
  	     return "redirect:/houses/{houseId}";
