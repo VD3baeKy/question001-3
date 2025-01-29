@@ -301,7 +301,7 @@
 												<a href=" #" class="edit-link" data-id="${reviewid}" data-house-id="${houseid}" data-content="${content}" data-house-name="${houseName}" data-rating="${ratingNum}" data-id="${reviewid}" data-toggle="modal" data-target="#editModal">
 													編集
 												</a>
-												<a href="#" class="delete-link" data-id="${reviewid}" data-house-id="${houseid}" data-content="${content}" data-house-name="${houseName}" data-rating="${ratingNum}" data-id="${reviewid}" data-target="#deleteModal">
+												<a href="#" class="delete-link" data-id="${reviewid}" data-house-id="${houseid}" data-content="${content}" data-house-name="${houseName}" data-rating="${ratingNum}" data-id="${reviewid}" data-toggle="modal" data-target="#deleteModal">
 													削除
 												</a>
 											`;
@@ -319,7 +319,7 @@
 												<a href=" #" class="edit-link" data-id="${reviewid}" data-house-id="${houseid}" data-content="${content}" data-house-name="${houseName}" data-rating="${ratingNum}" data-id="${reviewid}" data-toggle="modal" data-target="#editModal">
 													編集
 												</a>
-												<a href="#" class="delete-link" data-id="${reviewid}" data-house-id="${houseid}" data-content="${content}" data-house-name="${houseName}" data-rating="${ratingNum}" data-id="${reviewid}" data-target="#deleteModal">
+												<a href="#" class="delete-link" data-id="${reviewid}" data-house-id="${houseid}" data-content="${content}" data-house-name="${houseName}" data-rating="${ratingNum}" data-id="${reviewid}" data-toggle="modal" data-target="#deleteModal">
 													削除
 												</a>				`;
 										}
@@ -445,14 +445,16 @@
 										<form method="post" action="#" th:action="@{/houses/__${house.getId()}__/review/__${currentUserId}__/edit}">
 											<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 											<div>
-												<label for="editContent">
+												<!-- <label for="contentChange"> -->
+												<label>
 													内容:
 												</label>
 												<textarea id="editContent" name="contentChange">
 												</textarea>
 											</div>
 											<div>
-												<label for="editRating">
+												<!-- <label for="ratingChange"> -->
+												<label>
 													評価:
 												</label>
 												<select id="editRatingNumber" name="ratingChange">
@@ -469,7 +471,7 @@
 												保存
 											</button>
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">
-												閉じる
+												キャンセル
 											</button>
 										</form>
 									</div>
