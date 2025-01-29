@@ -200,6 +200,9 @@
 				<div>
  					<h3 th:text="'［' + ${house.getName()}+ '］のレビュー　全 ' + ${reviews.size()} +' 件'">
 					</h3>
+					<div th:if="${!hasWrittenReview}">
+						レビューを投稿する
+					</div>
 					<span th:text="'ログイン中のユーザーのID= ' + ${currentUserId}">
 					</span>
 					<br>
@@ -231,7 +234,7 @@
 							var currentUserIdData = /*[[${currentUserId}]]*/ ; 
 							var houseName = /*[[${houseName}]]*/ ;
 							
-							var debugging=true;
+							var debugging=false;
 							
 							if(debugging==true){
 								console.log("reviewsWithUserName= "+reviewsWithUserName["0"].content);

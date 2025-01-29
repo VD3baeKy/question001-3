@@ -161,10 +161,11 @@ public class HouseController {
              //reviewsWithUserName.put(review.getId(), reviewDetails);
              reviewsWithUserName.put(i, reviewDetails);
          }
+         
      System.out.println("reviews[fixed]= " + reviewsWithUserName.toString());
      System.out.println("reviews[MAP-0]= " + reviewsWithUserName.get(0).toString());
-     System.out.println("reviews[MAP-1]= " + reviewsWithUserName.get(1).toString());
-     System.out.println("reviews[MAP-2]= " + reviewsWithUserName.get(2).toString());
+     //System.out.println("reviews[MAP-1]= " + reviewsWithUserName.get(1).toString());
+     //System.out.println("reviews[MAP-2]= " + reviewsWithUserName.get(2).toString());
      System.out.println(" --- ");
      System.out.println("reviewsWithUserName.size()= " + reviewsWithUserName.size());
      System.out.println("reviewsWithUserName.get(0).get(\"reviewid\")= " + reviewsWithUserName.get(0).get("reviewid"));
